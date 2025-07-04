@@ -12,7 +12,9 @@
     "vender": "zepp",
     "description": "empty application"
   },
-  "permissions": [],
+  "permissions": [
+  "data:os.device.info"
+  ],
   "runtime": {
     "apiVersion": {
       "compatible": "3.0.0",
@@ -32,7 +34,16 @@
           "path": "app-side/index"
         }
       },
-      "platforms": []
+      "platforms": [
+        {
+          "st": "r",
+          "dw": 480
+        },
+        {
+          "st": "s",
+          "dw": 390
+        }
+      ]
     }
   },
   "i18n": {
