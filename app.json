@@ -41,14 +41,14 @@
         },
         {
           "st": "s",
-          "dw": 390
+          "dw": 320
         }
       ]
     }
   },
   "i18n": {
     "en-US": {
-      "appName": "Empty"
+      "appName": "Camera_Sever"
     }
   },
   "defaultLanguage": "en-US"
