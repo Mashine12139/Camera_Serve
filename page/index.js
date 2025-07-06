@@ -3,6 +3,7 @@ import * as hmUI from "@zos/ui";
 import { px } from "@zos/utils";
 import { getDeviceInfo } from "@zos/device";
 import { createWidget,widget,prop} from '@zos/ui';
+import { push } from '@zos/router';
 
 // 从 @zos/device 直接获取设备信息
 const { width: DEVICE_WIDTH } = getDeviceInfo();
@@ -10,11 +11,11 @@ const { width: DEVICE_WIDTH } = getDeviceInfo();
 // ------------------- UI 布局定义区 -------------------
 // 将所有 UI 元素的布局对象都定义在这里，与页面逻辑分开。
 const START_BUTTON_STYLE = {
-  text: getText("S t a r t"),
+  text: getText("Start"),
   press_color: 0x333333,
   normal_color: 0x1a1a1a,
   x: px(80),
-  y: px(240),
+  y: px(260),
   w: DEVICE_WIDTH - 2 * px(80),
   h: px(56),
   color: 0xffffff,
@@ -56,6 +57,9 @@ build() {
     ...START_BUTTON_STYLE,
       click_func: () => {
         console.log("Button Press!");
+        push({
+          url:"page/preview",
+        });
       },
     });
   },
