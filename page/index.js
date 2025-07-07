@@ -43,7 +43,7 @@ build() {
       x: 0,
       y: 0,
       w: DEVICE_WIDTH,
-      h: DEVICE_HEIGHT
+      h: 380
     });
 
     // 在 Group 内部创建图片

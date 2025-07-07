@@ -11,7 +11,7 @@ function sendImageToWatch(messageBuilderInstance, imagePathOnPhone) {
     messageBuilderInstance.request({
       method: 'FILE_TRANSFER_START',
       params: {
-        fileName: 'my_received_photo.png',
+        fileName: imagePathOnPhone,
         fileSize: fileBuffer.byteLength,
       }
     });

@@ -5,7 +5,11 @@ import { createWidget,widget,prop} from '@zos/ui';
 import { push } from '@zos/router';
 import { getApp } from '@zos/app'
 import { openSync, writeSync, closeSync ,O_RDWR} from '@zos/fs'
+import { getDeviceInfo } from "@zos/device";
 
+// 从 @zos/device 直接获取设备信息
+const { width: DEVICE_WIDTH , height: DEVICE_HEIGHT} = getDeviceInfo();
+const messageBuilder = getApp()._options.globalData;
 // ------------------- UI 布局定义区 -------------------
 // 将所有 UI 元素的布局对象都定义在这里，与页面逻辑分开。
 const START2_BUTTON_STYLE = {
@@ -56,20 +60,20 @@ state:{
 
 onInit() {
     console.log("Requesting phone to send image...");
-    const messageBuilder = getApp()._options.globalData.messageBuilder;
     messageBuilder.request({
         method: 'FETCH_AND_SEND_IMAGE'
     })
     .then(data => {
         console.log('Phone replied:',data.result);
     });
+    console.log("Init success!");
   },
 
 assembleAndSaveFile() {
     // 1. 创建一个足够大的 ArrayBuffer 来容纳所有数据
     const finalBuffer = new Uint8Array(fileInfo.fileSize);
     let offset = 0;
-    
+  
     // 2. 将所有小块数据复制到大的 Buffer 中
     receivedChunks.forEach(chunk => {
       finalBuffer.set(chunk, offset);
@@ -91,7 +95,6 @@ build() {
     //摄像头===>手机===>压缩图片画质===>>手表显示大致位置即可.
     //
     //监听来自手机的消息,
-    const messageBuilder = getApp()._options.globalData.messageBuilder;
     const self = this;
     messageBuilder.on('request',(ctx)=>{
         const {method,params} = ctx.request
@@ -154,7 +157,6 @@ build() {
 
   onDestroy() {
     // 页面销毁逻辑
-  const messageBuilder = getApp()._options.globalData.messageBuilder;
     if (messageBuilder) {
       messageBuilder.off(); // 4. 页面销毁时，清理监听事件
     }
